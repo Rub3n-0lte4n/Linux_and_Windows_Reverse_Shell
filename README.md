@@ -59,6 +59,7 @@ This Python script automates the setup for a reverse shell connection between a 
 ### Step 1: Run the Script on Linux
 ```bash
 sudo python3 netcat_script.py
-    - Enter the port number (e.g., 4444).
-    - Enter the IP address of the Linux machine (e.g., 192.168.1.10).
-	- The script will configure the firewall and start a Netcat listener.
+    
+- Enter the port number (e.g., 4444).
+- Enter the IP address of the Linux machine (e.g., 192.168.1.10).
+- The script will configure the firewall and start a Netcat listener.
