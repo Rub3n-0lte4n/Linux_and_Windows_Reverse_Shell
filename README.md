@@ -59,7 +59,51 @@ This Python script automates the setup for a reverse shell connection between a 
 ### Step 1: Run the Script on Linux
 ```bash
 sudo python3 netcat_script.py
-    
-- Enter the port number (e.g., 4444).
-- Enter the IP address of the Linux machine (e.g., 192.168.1.10).
-- The script will configure the firewall and start a Netcat listener.
+```
+    - Enter the port number (e.g., 4444).
+    - Enter the IP address of the Linux machine (e.g., 192.168.1.10).
+    - The script will configure the firewall and start a Netcat listener.
+
+### Step 2: Run the Script on Windows
+```bash
+python netcat_script.py
+```
+    The script will automatically detect your Windows IP address.
+
+        - It will configure the firewall for the specified port and connect to the Linux listener using a reverse shell.
+
+### Dependencies
+
+The script will automatically install the following dependencies if they are not already present:
+
+- **Linux:**
+  - `ncat` (Netcat with SSL support) via the system’s package manager.
+  - `iptables` (for configuring firewall rules).
+- **Windows:**
+  - `Ncat` (included in Nmap).
+  - `PowerShell` (for downloading and configuring the firewall).
+
+### Script Breakdown
+
+- `check_nc_installed()`: Verifies whether `ncat` is installed on the system.
+- `install_ncat()`: Installs `ncat` (using `apt`/`yum` on Linux, or downloading Nmap on Windows).
+- `check_firewall()`: Configures the firewall to allow traffic on the specified port (using `iptables` on Linux or PowerShell on Windows).
+- `get_windows_ip()`: Automatically detects the Windows machine’s IP address.
+- `start_netcat_listener()`: Starts a Netcat listener on Linux.
+- `connect_netcat_reverse_shell()`: Establishes a reverse shell from Windows to the Linux listener.
+
+### Security Warning
+
+This script sets up a reverse shell, which can be used for both legitimate and malicious purposes. Be cautious about where and how you use this script. Only use it in a controlled environment for educational purposes, penetration testing, or system administration where you have permission.
+
+### Troubleshooting
+
+- **Permission Denied**: Ensure you’re running the script with admin/root privileges.
+- **Firewall Issues**: Make sure the firewall allows the specified port. If the script fails to configure the firewall, manually open the port using firewall management tools.
+- **Missing Dependencies**: If the script fails to install `ncat`, try manually installing it:
+  - On Linux: Install via package manager (`apt` or `yum`).
+  - On Windows: Download Nmap from Nmap’s official site.
+
+### License
+
+This project is licensed under the MIT License. You are free to use, modify, and distribute this script as you see fit.
